@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale">
+        <title>dashboard - Mkulima Stock</title>
+        <link rel="stylesheet" href="roomstyle.css">
+    </head>
+    <body>
+        <div class="dashboard">
+            <nav><h2>Mkulima Dashboard</h2><span>id="salestoday">Today:KES 0</span></nav>
+            <div class="stats">
+                <div class="stat"><h4> id="totalproducts">0</h4><p>products</p></div>
+                <div class="stat alert"><h4> id="lowstock">0</h4><p>low stock</p></div>
+                <div class="stat"><h4>id="totalCredit">0</h4><p>Credit Owed</p></div>
+            </div>
+            <div class="tabs">
+                <button onclick="showTab('inventory')">Inventory</button>
+                <button onclick="showTab('Credit')">Farmer Credit</button>
+                <button onclick="showTab('Sales')">New sale</button>
+            </div>
+            <div id="inventory" class="tab">
+                <h3>Add product</h3>
+                <input id="pName" placeholder="e.g. DAP Fertilizer 50kg">
+                <input id="pQty" type="number" placeholder="Qty">
+                <input id="pPrice" type="number" placeholder="price KES">
+                <input id="pExpiry" type="date">
+                <button onclick="addproduct()">Add to stock</button>
+                <div id="productList"></div>
+            </div>
+            <div id="Credit" class="tab hidden">
+                <h3>Farmer Credit Book</h3>
+                <input id="fName" placeholder="Farmer name">
+                <input id="fAmount" type="number" placeholder="Amount KES">
+                <button onclick="addcredit()">Add Credit</button>
+                <div id="creditlist"></div>
+            </div>
+            <div id="Sales" class="tab hidden">
+                <h3>Record sale (M-pesa)</h3>
+                <select id="saleproduct"></select>
+                <input id="saleQty" type="number" placeholder="Qty">
+                <button onclick="makesale()">sell & print Receipt</button>
+                <div id="receipt"></div>
+            </div>
+        </div>
+        <script src="room.js"></script>
+    </body>
+</html>
