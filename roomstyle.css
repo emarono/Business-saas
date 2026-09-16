@@ -1,3 +1,70 @@
-body {
-    font-family: ;
-}
+body{
+        font-family:Arial;margin:0;
+        background:#f5f7f2;color:#222}
+header{
+    background:#2e7d32;
+    color:white;
+    padding:40px;
+    text-align:center}
+.btn{
+    background:white;
+    color:#2e7d32;
+    padding:12px 20px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold}
+.features{
+    display:flex;
+    gap:15px;
+    padding:20px;
+    flex-wrap:wrap;
+    justify-content:center}
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+    width:250px}
+.dashboard{
+    padding:15px} 
+    nav{
+        display:flex;
+        justify-content:space-between;
+        background:white;
+        padding:10px;
+        border-radius:10px}
+.stats{
+    display:flex;
+    gap:10px;
+    margin:15px 0} 
+    .stat{
+        background:white;
+        padding:15px;
+        border-radius:10px;
+        flex:1;text-align:center}
+.alert{
+    border:2px solid red} .tabs button{
+        padding:10px 15px;
+        margin-right:5px;
+        background:#2e7d32;
+        color:white;
+        border:none;
+        border-radius:6px}
+.tab{
+    background:white;
+    padding:15px;
+    margin-top:15px;
+    border-radius:10px} 
+    .hidden{
+        display:none}
+input,select{
+    width:90%;
+    padding:10px;
+    margin:5px 0;
+    border:1px solid #ccc;
+    border-radius:6px}
+button{
+    cursor:pointer}
+#productList div,#creditList div{
+    border-bottom:1px solid #eee;
+    padding:8px 0}
