@@ -1,33 +1,44 @@
-let products = JSON.parse(localStorage.getItem('products')||'[]');
-let credits = JSON.parse(localStorage.getItem('credits')||'[]');
-let sales = 0;
+const saleModal = document.getElementById('saleModal');
+const toast = document.getElementById('toast');
+const salesTotal = document.getElementById('salesTotal');
+const transactionRows = document.getElementById('transactionRows');
+let sales = Number(localStorage.getItem('mkulimaSales') || 86450);
 
-function showTab(t){
-  document.querySelectorAll('.tab').forEach(e=>e.classList.add('hidden'));
-  document.getElementById(t).classList.remove('hidden');
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add('show');
+  window.setTimeout(() => toast.classList.remove('show'), 2600);
 }
-function save(){localStorage.setItem('products',JSON.stringify(products));localStorage.setItem('credits',JSON.stringify(credits)); render()}
-function addProduct(){
-  products.push({name:pName.value,qty:+pQty.value,price:+pPrice.value,expiry:pExpiry.value});
-  pName.value='';pQty.value='';pPrice.value=''; save();
-}
-function addCredit(){
-  credits.push({name:fName.value,amount:+fAmount.value}); fName.value='';fAmount.value=''; save();
-}
-function makeSale(){
-  let p = products.find(x=>x.name==saleProduct.value);
-  if(!p||p.qty<saleQty.value) return alert('No stock');
-  p.qty-=saleQty.value; sales+=p.price*saleQty.value;
-  document.getElementById('receipt').innerHTML=`<h4>Receipt</h4><p>${p.name} x ${saleQty.value} = KES ${p.price*saleQty.value}</p><p>M-Pesa Confirmed</p>`;
-  save();
-}
-function render(){
-  productList.innerHTML=products.map((p,i)=>`<div>${p.name} - ${p.qty} left - KES ${p.price} ${new Date(p.expiry)<new Date()?'⚠️EXPIRED':''} ${p.qty<5?'🔴LOW':''}</div>`).join('');
-  creditList.innerHTML=credits.map(c=>`<div>${c.name} owes KES ${c.amount}</div>`).join('');
-  saleProduct.innerHTML=products.map(p=>`<option>${p.name}</option>`).join('');
-  totalProducts.innerText=products.length;
-  lowStock.innerText=products.filter(p=>p.qty<5).length;
-  totalCredit.innerText='KES '+credits.reduce((a,b)=>a+b.amount,0);
-  salesToday.innerText='Today: KES '+sales;
-}
-render();
+
+function openSale() { saleModal.classList.remove('hidden'); saleModal.querySelector('input').focus(); }
+function closeSale() { saleModal.classList.add('hidden'); }
+
+document.getElementById('openSale').addEventListener('click', openSale);
+document.getElementById('closeSale').addEventListener('click', closeSale);
+saleModal.addEventListener('click', event => { if (event.target === saleModal) closeSale(); });
+
+document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => {
+  document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+  const navItem = document.querySelector(`.nav-item[data-view="${button.dataset.view}"]`);
+  if (navItem) navItem.classList.add('active');
+  showToast(`${button.dataset.view[0].toUpperCase()}${button.dataset.view.slice(1)} view selected`);
+}));
+
+document.getElementById('saleForm').addEventListener('submit', event => {
+  event.preventDefault();
+  const form = new FormData(event.currentTarget);
+  const amount = Number(form.get('amount')) || 0;
+  const farmer = form.get('farmer');
+  const payment = form.get('payment');
+  sales += amount;
+  localStorage.setItem('mkulimaSales', sales);
+  salesTotal.textContent = `KES ${sales.toLocaleString()}`;
+  const row = document.createElement('tr');
+  row.innerHTML = `<td><span class="transaction-icon">↗</span><span><strong>Sale #MK-${1050 + transactionRows.children.length}</strong><small>Just now</small></span></td><td>${farmer}</td><td><strong>KES ${amount.toLocaleString()}</strong></td><td><span class="method mpesa">${payment === 'M-Pesa' ? 'M' : payment === 'Cash' ? '₵' : '◷'}</span> ${payment}</td><td><span class="status paid">Paid</span></td>`;
+  transactionRows.prepend(row);
+  event.currentTarget.reset();
+  closeSale();
+  showToast('Sale recorded successfully');
+});
+
+document.getElementById('salesRange').addEventListener('change', event => showToast(`Showing ${event.target.value.toLowerCase()}`));

@@ -1,34 +1,51 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Mkulima Stock - Agrovet saaS</title>
-        <link rel="stylesheet" href="roomstyle.css">
-    </head>
-    <body class="login-body">
-        <div class="login-box">
-            <h1>Mkulima Stock</h1>
-            <p>Agrovet secure login</p>
-            <input id="username" placeholder="username">
-            <input id="password" type="password" placeholder="password">
-            <button onclick="login">Login</button>
-            <p id="loginMsg"></p>
-            <div class="hint">
-                <small>Demo:<br>Admin / admin123<br>Attendant: staff / staff123</small>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mkulima OS | Agrovet operations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="roomstyle.css">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand"><span class="brand-mark">M</span><span><strong>mkulima</strong><small>OPERATIONS OS</small></span></div>
+            <div class="branch-switcher"><span class="online-dot"></span><span><small>ACTIVE BRANCH</small>Ruiru Main Store</span><span class="chevron">⌄</span></div>
+            <nav class="main-nav" aria-label="Main navigation">
+                <button class="nav-item active" data-view="overview"><span class="nav-icon">◈</span>Overview</button>
+                <button class="nav-item" data-view="inventory"><span class="nav-icon">▦</span>Inventory <b class="nav-count">3</b></button>
+                <button class="nav-item" data-view="sales"><span class="nav-icon">↗</span>Sales</button>
+                <button class="nav-item" data-view="farmers"><span class="nav-icon">◎</span>Farmers</button>
+                <button class="nav-item" data-view="reports"><span class="nav-icon">▥</span>Reports</button>
+            </nav>
+            <div class="sidebar-bottom"><button class="nav-item"><span class="nav-icon">⚙</span>Settings</button><div class="help-card"><strong>Need a hand?</strong><p>Chat with Mkulima support</p><button>Open support ↗</button></div><div class="profile"><span class="avatar">EW</span><span><strong>Esther Wanjiku</strong><small>Store manager</small></span><span class="more">•••</span></div></div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar"><div class="mobile-brand"><span class="brand-mark">M</span> mkulima</div><div class="top-actions"><button class="icon-button" aria-label="Notifications">♧<i></i></button><span class="top-divider"></span><span class="date-label">Tuesday, 24 June 2025</span><span class="avatar avatar-small">EW</span></div></header>
+            <div class="page-wrap">
+                <section class="page-heading"><div><p class="eyebrow">TUESDAY, 24 JUNE 2025 <span class="live-pill">● LIVE</span></p><h1>Good morning, Esther <span>✦</span></h1><p class="subheading">Here is what is happening across your agrovet today.</p></div><button class="primary-button" id="openSale">＋ Record a sale</button></section>
+
+                <section class="metric-grid" aria-label="Business summary">
+                    <article class="metric-card"><div class="metric-top"><span class="metric-label">TODAY'S SALES</span><span class="metric-icon green">↗</span></div><strong id="salesTotal">KES 86,450</strong><p class="trend positive">↑ 12.8% <span>vs yesterday</span></p><div class="sparkline green-line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></article>
+                    <article class="metric-card"><div class="metric-top"><span class="metric-label">ITEMS IN STOCK</span><span class="metric-icon blue">▦</span></div><strong id="stockTotal">1,284</strong><p class="trend positive">↑ 4.2% <span>this month</span></p><div class="sparkline blue-line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></article>
+                    <article class="metric-card"><div class="metric-top"><span class="metric-label">OUTSTANDING CREDIT</span><span class="metric-icon amber">◷</span></div><strong id="creditTotal">KES 214,800</strong><p class="trend warning">8 farmers <span>need follow-up</span></p><div class="sparkline amber-line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></article>
+                    <article class="metric-card"><div class="metric-top"><span class="metric-label">ACTIVE FARMERS</span><span class="metric-icon violet">◎</span></div><strong id="farmerTotal">342</strong><p class="trend positive">↑ 18 <span>new this month</span></p><div class="sparkline violet-line"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></article>
+                </section>
+
+                <section class="dashboard-grid">
+                    <article class="panel sales-panel"><div class="panel-heading"><div><h2>Sales overview</h2><p>Revenue performance over the last 7 days</p></div><select id="salesRange" aria-label="Sales range"><option>Last 7 days</option><option>Last 30 days</option></select></div><div class="chart-wrap"><div class="chart-y"><span>100k</span><span>75k</span><span>50k</span><span>25k</span><span>0</span></div><div class="chart"><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><svg viewBox="0 0 660 210" preserveAspectRatio="none" aria-label="Sales chart"><defs><linearGradient id="area" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#49a86b" stop-opacity=".28"/><stop offset="1" stop-color="#49a86b" stop-opacity="0"/></linearGradient></defs><path class="area-path" d="M0,145 C45,145 60,105 110,120 S165,150 210,90 S275,130 320,108 S365,65 420,95 S470,80 515,46 S570,75 610,42 S640,55 660,18 V210 H0Z"/><path class="line-path" d="M0,145 C45,145 60,105 110,120 S165,150 210,90 S275,130 320,108 S365,65 420,95 S470,80 515,46 S570,75 610,42 S640,55 660,18"/></svg><div class="chart-x"><span>18 Jun</span><span>19 Jun</span><span>20 Jun</span><span>21 Jun</span><span>22 Jun</span><span>23 Jun</span><span>24 Jun</span></div></div></div><div class="chart-key"><span><i></i>Sales revenue</span><strong>KES 486,250 <small>total revenue</small></strong></div></article>
+                    <article class="panel alert-panel"><div class="panel-heading"><div><h2>Needs attention</h2><p>Keep your store moving</p></div><button class="text-button" data-view="inventory">View all →</button></div><div class="attention-list"><button class="attention-item" data-view="inventory"><span class="attention-icon red">!</span><span><strong>3 items are low in stock</strong><small>Reorder before they run out</small></span><span class="arrow">→</span></button><button class="attention-item" data-view="inventory"><span class="attention-icon amber">◷</span><span><strong>5 products expire soon</strong><small>Within the next 30 days</small></span><span class="arrow">→</span></button><button class="attention-item" data-view="farmers"><span class="attention-icon blue">◎</span><span><strong>8 credit payments due</strong><small>Follow up with farmers</small></span><span class="arrow">→</span></button></div></article>
+                </section>
+                <section class="lower-grid"><article class="panel table-panel"><div class="panel-heading"><div><h2>Recent transactions</h2><p>Latest activity from your store</p></div><button class="text-button" data-view="sales">View all →</button></div><div class="table-scroll"><table><thead><tr><th>TRANSACTION</th><th>FARMER</th><th>AMOUNT</th><th>METHOD</th><th>STATUS</th></tr></thead><tbody id="transactionRows"><tr><td><span class="transaction-icon">↗</span><span><strong>Sale #MK-1048</strong><small>Today, 10:42 AM</small></span></td><td>John Kamau</td><td><strong>KES 12,500</strong></td><td><span class="method mpesa">M</span> M-Pesa</td><td><span class="status paid">Paid</span></td></tr><tr><td><span class="transaction-icon blue-bg">↗</span><span><strong>Sale #MK-1047</strong><small>Today, 09:18 AM</small></span></td><td>Mary Wambui</td><td><strong>KES 8,200</strong></td><td><span class="method cash">₵</span> Cash</td><td><span class="status paid">Paid</span></td></tr><tr><td><span class="transaction-icon amber-bg">◷</span><span><strong>Credit #CR-0281</strong><small>Yesterday, 04:35 PM</small></span></td><td>Peter Mwangi</td><td><strong>KES 15,000</strong></td><td><span class="method credit">◷</span> Credit</td><td><span class="status pending">Pending</span></td></tr></tbody></table></div></article><article class="panel category-panel"><div class="panel-heading"><div><h2>Top categories</h2><p>Sales mix this month</p></div><button class="icon-button">•••</button></div><div class="donut-wrap"><div class="donut"><div><strong>100%</strong><small>sales mix</small></div></div><div class="legend"><span><i class="dot green-dot"></i>Fertilizer <b>42%</b></span><span><i class="dot blue-dot"></i>Seeds <b>28%</b></span><span><i class="dot amber-dot"></i>Crop protection <b>18%</b></span><span><i class="dot red-dot"></i>Other <b>12%</b></span></div></div></article></section>
             </div>
-        </div>
-        <header>
-            <h1>Mkulima Stock</h1>
-            <p>Agrovet Businesss Management saaS</p>
-            <a>href="assignment.html" class="btn">Go to dashboard</a>
-        </header>
-        <section class="features">
-            <div class="card"><h3>smart inventory</h3><p>Track seeds,fertilizers,expiry dates</p></div>
-            <div class="card"><h3>Farmer Credit</h3><p>know who ows you,automated balance</p></div>
-            <div class="card"><h3>M-pesa Sales</h3><p>Instant receipts & daily reports</p></div>
-        </section>
-        <footer>
-            <p>Built by ema | 1500 KES/month per agrovet</p>
-        </footer>
-    </body>
+        </main>
+    </div>
+    <div class="modal hidden" id="saleModal"><div class="modal-card"><button class="modal-close" id="closeSale">×</button><p class="eyebrow">NEW TRANSACTION</p><h2>Record a sale</h2><p class="subheading">Capture the sale and keep your stock accurate.</p><form id="saleForm"><label>Farmer / customer<input name="farmer" placeholder="e.g. Jane Njeri" required></label><label>Product<select name="product"><option>DAP Fertilizer 50kg</option><option>Maize Seed H614</option><option>Fungicide 250ml</option></select></label><div class="form-row"><label>Amount (KES)<input name="amount" type="number" placeholder="0" required></label><label>Payment<select name="payment"><option>M-Pesa</option><option>Cash</option><option>Credit</option></select></label></div><button class="primary-button full-button" type="submit">Save transaction</button></form></div></div>
+    <div class="toast" id="toast">Transaction saved</div>
+    <script src="room.js"></script>
+</body>
 </html>
